@@ -1,0 +1,1 @@
+export type MduiThemeType = "dark" | "light" | "auto";
