@@ -1,6 +1,5 @@
 
 import { useRoutes } from 'react-router-dom'
-import './App.css'
 import router from './router'
 
 //MDUI Install
@@ -8,6 +7,7 @@ import 'mdui/mdui.css';
 import 'mdui';
 import { Theme } from './components/mdui/theme';
 import { ThemeColor } from './components/mdui/themeColor';
+import './App.css';
 
 function App() {
 
@@ -15,8 +15,8 @@ function App() {
 
   return (
     <>
-      <Theme/>
-      <ThemeColor/>
+      <Theme />
+      <ThemeColor />
       {element}
     </>
   )

@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
-import { Button as MduiButton } from 'mdui';
-import { useSharedData } from "../../Contexts";
+import { useEffect, useState } from "react";
+import { ThemeSwitch } from "./ThemeSwitch";
+import { CreateDialog } from "./CreateDialog";
+import { WaterFall } from "./WaterFall";
 
 interface IndexProps {
 
@@ -8,22 +9,41 @@ interface IndexProps {
 
 const Index = ({ }: IndexProps) => {
 
-    const {setTheme} = useSharedData()
+    const [isCreateDialog,setIsCreateDialog] = useState(false)
 
     //ref
-    const demoBt = useRef<MduiButton>(null)
 
     useEffect(() => {
-        demoBt.current?.addEventListener('click', () => {
-            setTheme("light")
-        })
-    }, [demoBt])
+    }, [])
 
     return <>
-        <div>
-            <h1>Hello World</h1>
-            <mdui-button ref={demoBt}>测试</mdui-button>
+        <div style={{
+            position: "relative",
+            height: "100%", width: "100%"
+        }}>
+            <mdui-navigation-rail contained>
+                <mdui-navigation-rail-item icon="code">代码</mdui-navigation-rail-item>
+                <ThemeSwitch/>
+                <mdui-navigation-rail-item icon="settings">设置</mdui-navigation-rail-item>
+
+            </mdui-navigation-rail>
+            <div style={{
+                height: "100%",
+                width: "100%",
+            }}>
+
+                <div style={{ position: "relative", height: "100%", width: "100%", }}>
+                    <WaterFall/>
+                    <mdui-fab icon="edit" style={{ position: "absolute", bottom: "50px", right: "50px" }} onClick={()=>setIsCreateDialog(true)}></mdui-fab>
+                </div>
+
+
+
+            </div>
         </div>
+
+        <CreateDialog open={isCreateDialog} set={setIsCreateDialog}/>
+
     </>
 }
 

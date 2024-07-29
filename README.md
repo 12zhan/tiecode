@@ -1,6 +1,7 @@
 # Tiecode for Windows or Linux
 ## 即 “结绳电脑版”
 
+![alt text](/assets/image.png)
 
 # React + TypeScript + Vite
 

@@ -14,7 +14,7 @@ const Context = createContext<t>(null as any);
 
 export const Provider = ({ children }:any) => {
 
-    const [theme, setTheme] = useState<MduiThemeType>("dark")
+    const [theme, setTheme] = useState<MduiThemeType>("light")
     const [themeColor,setThemeColor] = useState("#0061A4")
     
     return <Context.Provider value={{theme,setTheme, themeColor,setThemeColor}}>
