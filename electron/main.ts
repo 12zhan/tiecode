@@ -69,5 +69,6 @@ app.on('activate', () => {
 
 app.whenReady().then(()=>{
   //关闭Menu菜单栏
-  eletron.Menu.setApplicationMenu(null);
+  // eletron.Menu.setApplicationMenu(null);
+  {eletron}
 }).then(createWindow)

@@ -20,7 +20,7 @@ export const Editor = ({ }) => {
                 <mdui-button-icon icon="folder_open"></mdui-button-icon>
                 <mdui-button-icon icon="search"></mdui-button-icon>
                 <mdui-button-icon>
-                    <mdui-icon src="/git.svg"></mdui-icon>
+                    <mdui-icon src="git.svg"></mdui-icon>
                 </mdui-button-icon>
 
             </div>
