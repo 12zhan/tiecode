@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 interface WaterFallProps {
     // 如果有需要的属性，可以在这里定义
@@ -14,6 +15,8 @@ export const WaterFall = ({ }: WaterFallProps) => {
     const [count, setCount] = useState(0);
 
     const container = useRef<HTMLDivElement>(null);
+
+    const browserHistory = useNavigate()
 
     useEffect(() => {
 
@@ -70,7 +73,7 @@ export const WaterFall = ({ }: WaterFallProps) => {
                             }}
                         >
 
-                            <mdui-card variant='filled' style={{width: "100%",height: "100%"}}>
+                            <mdui-card variant='filled' style={{width: "100%",height: "100%"}} onClick={()=>browserHistory("edit")}>
                                 {item}
                             </mdui-card>
 

@@ -32,7 +32,7 @@ const Index = ({ }: IndexProps) => {
                 width: "100%",
             }}>
 
-                <div style={{ position: "relative", height: "100%", width: "100%", }}>
+                <div style={{ position: "relative", height: "100%", width: "100%", padding: "20px 0" }}>
                     <WaterFall/>
                     <mdui-fab icon="edit" style={{ position: "absolute", bottom: "50px", right: "50px" }} onClick={()=>setIsCreateDialog(true)}></mdui-fab>
                 </div>
