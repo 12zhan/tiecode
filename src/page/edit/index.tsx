@@ -1,3 +1,4 @@
+import { FileTree } from "../../components/FileTree"
 import CodeEditor from "../../components/edit"
 
 export const Editor = ({ }) => {
@@ -9,6 +10,59 @@ export const Editor = ({ }) => {
             display: "flex",
             overflowY: "hidden"
         }}>
+
+            <FileTree data={[
+        {
+            name: 'src',
+            type: 'folder',
+            children: [
+                {
+                    name: 'index.tsx',
+                    type: 'file'
+                },
+                {
+                    name: 'components',
+                    type: 'folder',
+                    children: [
+                        {
+                            name: 'Header.tsx',
+                            type: 'file'
+                        },
+                        {
+                            name: 'Footer.tsx',
+                            type: 'file'
+                        }
+                    ]
+                },
+                {
+                    name: 'utils',
+                    type: 'folder',
+                    children: [
+                        {
+                            name: 'helpers.js',
+                            type: 'file'
+                        }
+                    ]
+                }
+            ]
+        }, {
+            name: 'dist',
+            type: 'folder'
+        }, {
+            name: 'public',
+            type: 'folder',
+            children: [
+                {
+                    name: 'index.html',
+                    type: 'file'
+                },
+                {
+                    name: 'manifest.json',
+                    type: 'file'
+                }
+            ]
+        }
+    ]}/>
 
             <div style={{
                 width: "60px",

@@ -1,4 +1,3 @@
-import { Monaco } from '@monaco-editor/react'
 
 
 /**
@@ -6,7 +5,7 @@ import { Monaco } from '@monaco-editor/react'
  * @param {string} languages 注册语言类型
  * @param {Monaco} monaco 
  */
-export const Highlight = (languages,monaco) => {
+export const Highlight = (languages : any,monaco : any) => {
     monaco.languages.setMonarchTokensProvider(languages, {
         tokenizer: {
             root: [

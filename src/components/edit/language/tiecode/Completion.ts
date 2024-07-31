@@ -6,13 +6,14 @@ const KeyWord = ["类", "方法", "结束", "跳出循环", "退出循环", "空
 /**
  * @returns {Array<>}
  */
-const CompletionObject = KeyWord.map(i => {
+const CompletionObject = (monaco:any)=>KeyWord.map(i => {
     return {
         label: {
             label: pinyin(i, { toneType: "none" }),
             detail: i,
             description: 'keyworld'
         },
+        kind: monaco.languages.CompletionItemKind.Keyword,
         documentation: '结绳基本关键字',
         insertText: i
     }
@@ -24,16 +25,16 @@ const CompletionObject = KeyWord.map(i => {
  * @param {string} languages 注册语言类型
  * @param {import("@monaco-editor/react").Monaco} monaco 
  */
-export const Completion = (languages,monaco) => {
+export const Completion = (languages:any,monaco:any) => {
     monaco.languages.registerCompletionItemProvider(languages, {
         triggerCharacters:['.',''],
-        provideCompletionItems: (model, position) => {
+        provideCompletionItems: (model:any, position:any) => {
             console.log(position)
             return {
-                suggestions: CompletionObject,
+                suggestions: CompletionObject(monaco),
             }
         },
-        resolveCompletionItem:(item,token)=>{
+        resolveCompletionItem:(item:any,token:any)=>{
             //关键词触发
             console.log(item,token)
         }

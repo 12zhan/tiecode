@@ -7,10 +7,9 @@ export let LANGUAGES_NAME = "tiecode"
 
 export default class tiecode{
     /**
-     * 注册语言
-     * @param {import('@monaco-editor/react').Monaco} monaco 
+     * 注册语言 
      */
-    reg(editor,monaco){
+    reg(editor:any,monaco:any){
         monaco.languages.register({ id: LANGUAGES_NAME })
         Highlight(LANGUAGES_NAME,monaco) //注册基本语法高亮
         Completion(LANGUAGES_NAME,monaco) //注册代码补全
