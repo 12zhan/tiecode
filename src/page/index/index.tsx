@@ -9,7 +9,12 @@ interface IndexProps {
 
 const Index = ({ }: IndexProps) => {
 
-    const [isCreateDialog,setIsCreateDialog] = useState(false)
+
+
+    const [isCreateDialog, setIsCreateDialog] = useState(false)
+
+    
+
 
     //ref
 
@@ -23,7 +28,7 @@ const Index = ({ }: IndexProps) => {
         }}>
             <mdui-navigation-rail contained>
                 <mdui-navigation-rail-item icon="code">代码</mdui-navigation-rail-item>
-                <ThemeSwitch/>
+                <ThemeSwitch />
                 <mdui-navigation-rail-item icon="settings">设置</mdui-navigation-rail-item>
 
             </mdui-navigation-rail>
@@ -33,8 +38,8 @@ const Index = ({ }: IndexProps) => {
             }}>
 
                 <div style={{ position: "relative", height: "100%", width: "100%", padding: "20px 0" }}>
-                    <WaterFall/>
-                    <mdui-fab icon="edit" style={{ position: "absolute", bottom: "50px", right: "50px" }} onClick={()=>setIsCreateDialog(true)}></mdui-fab>
+                    <WaterFall />
+                    <mdui-fab icon="edit" style={{ position: "absolute", bottom: "50px", right: "50px" }} onClick={() => setIsCreateDialog(true)}></mdui-fab>
                 </div>
 
 
@@ -42,7 +47,7 @@ const Index = ({ }: IndexProps) => {
             </div>
         </div>
 
-        <CreateDialog open={isCreateDialog} set={setIsCreateDialog}/>
+        <CreateDialog open={isCreateDialog} set={setIsCreateDialog} />
 
     </>
 }

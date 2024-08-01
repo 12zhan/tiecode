@@ -30,7 +30,9 @@ function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'icon.svg'),
     webPreferences: {
-      preload: path.join(__dirname, 'preload.mjs')
+      preload: path.join(__dirname, 'preload.mjs'),
+      nodeIntegration: true,
+      // contextIsolation: false,
     },
   })
 
@@ -39,6 +41,8 @@ function createWindow() {
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
   })
+
+
   
 
   if (VITE_DEV_SERVER_URL) {

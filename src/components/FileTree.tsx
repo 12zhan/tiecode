@@ -32,7 +32,8 @@ const FileTreeItem = ({ data }: { data: FileTreeItemProps }) => {
     return <>
         <div style={{
             width: "fit-content",
-            padding: '0px 5px'
+            padding: '0px 5px',
+            borderLeft: `1px solid rgba(70,70,70,0.3)`,
         }}>
 
             <div
@@ -43,7 +44,7 @@ const FileTreeItem = ({ data }: { data: FileTreeItemProps }) => {
                     alignItems: "center"
                 }}>
 
-                <img src={data.type === 'file' ? "FileTypeIcon/file_type_typescript.svg" : isExpanded ? "FileTypeIcon/default_folder_opened.svg" : "FileTypeIcon/default_folder.svg"} alt="" width={"30px"} />
+                <img src={data.type === 'file' ? "FileTypeIcon/file_type_typescript.svg" : isExpanded ? "FileTypeIcon/default_folder_opened.svg" : "FileTypeIcon/default_folder.svg"} alt="" width={"18px"} />
 
                 <div>{data.name}</div>
 

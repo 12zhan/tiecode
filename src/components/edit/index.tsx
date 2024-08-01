@@ -3,10 +3,12 @@ import { Editor, Monaco } from "@monaco-editor/react";
 import { GitHubLight } from "./theme/GitHubLight";
 import { GitHubDark } from "./theme/GitHubDark";
 import tiecode, { LANGUAGES_NAME } from './language/tiecode'
+import { useSharedData } from "../../Contexts";
 
 function CodeEditor() {
 
     const [FontSize, _FontSize] = useState(18)
+    const { theme } = useSharedData()
 
     function init(monaco:Monaco){
         monaco.editor.addEditorAction({
@@ -32,11 +34,14 @@ function CodeEditor() {
 
     }, [_FontSize])
 
-    return <Editor height={"100%"} onMount={(editor,monaco)=>{
+    return <Editor height={"100%"} width={"100%"} onMount={(editor,monaco)=>{
         {editor}
         monaco.editor.defineTheme("github-light", GitHubLight as any)   
         monaco.editor.defineTheme("github-dark", GitHubDark as any)
-        monaco.editor.setTheme("github-light")
+
+        
+
+        monaco.editor.setTheme(theme == "light" ? "github-light" : "github-dark")
 
         const tie = new tiecode();
         tie.reg(editor,monaco)
