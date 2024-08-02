@@ -1,11 +1,19 @@
-import { useState } from "react"
+import {  useState } from "react"
 import { FileTree } from "../../components/FileTree"
 import CodeEditor from "../../components/edit"
-import { Git } from "../../components/Git"
+import { useParams } from "react-router-dom"
+import { project } from "../../types/electronInterface/project"
 
 export const Editor = ({ }) => {
 
     const [FileOpen, setFileOpen] = useState(false)
+
+    const [value,setValue] = useState("")
+
+    const param = useParams()
+
+    console.log(project.getFileList(param.path as string))
+    
 
     return <>
 
@@ -52,66 +60,14 @@ export const Editor = ({ }) => {
                     </div>
 
                 </div>
-
-                <Git />
+                
 
                 {
                     FileOpen && <div style={{ flex: 1, height: "100%" }}>
                         <div style={{ fontSize: "0.8rem", display: "flex", alignItems: "center", height: "20px" }}>
                             资源管理器
                         </div>
-                        <FileTree data={[
-                            {
-                                name: 'src',
-                                type: 'folder',
-                                children: [
-                                    {
-                                        name: 'index.tsx',
-                                        type: 'file'
-                                    },
-                                    {
-                                        name: 'components',
-                                        type: 'folder',
-                                        children: [
-                                            {
-                                                name: 'Header.tsx',
-                                                type: 'file'
-                                            },
-                                            {
-                                                name: 'Footer.tsx',
-                                                type: 'file'
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        name: 'utils',
-                                        type: 'folder',
-                                        children: [
-                                            {
-                                                name: 'helpers.js',
-                                                type: 'file'
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }, {
-                                name: 'dist',
-                                type: 'folder'
-                            }, {
-                                name: 'public',
-                                type: 'folder',
-                                children: [
-                                    {
-                                        name: 'index.html',
-                                        type: 'file'
-                                    },
-                                    {
-                                        name: 'manifest.json',
-                                        type: 'file'
-                                    }
-                                ]
-                            }
-                        ]} />
+                        <FileTree path={param.path as string} onItemClick={(e)=>{setValue(project.readFile(e.type=="file" ? e.path : ""))}}/>
                     </div>
                 }
 
@@ -142,7 +98,7 @@ export const Editor = ({ }) => {
                     flexDirection: "column",
                     flex: 1
                 }}>
-                    <CodeEditor />
+                    <CodeEditor value={value} />
                 </div>
             </div>
 

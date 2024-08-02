@@ -27,7 +27,6 @@ export const Git = ({ }: GitProps) => {
                 width: "200px"
             }}>
                 {data?.map((item, index) => {
-                    console.log(item);
 
                     parseGitFileContentWhole(item.files![0])
 

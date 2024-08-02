@@ -9,7 +9,7 @@ const router : RouteProps[] = [
         children:[
         ]
     },{
-        path: "/edit",
+        path: "/edit/:path",
         element:<Editor/>
     }
 ]

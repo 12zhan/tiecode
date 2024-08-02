@@ -5,28 +5,24 @@ import { GitHubDark } from "./theme/GitHubDark";
 import tiecode, { LANGUAGES_NAME } from './language/tiecode'
 import { useSharedData } from "../../Contexts";
 
-function CodeEditor() {
+function CodeEditor({value}:{value:string}) {
 
     const [FontSize, _FontSize] = useState(18)
     const { theme } = useSharedData()
 
-    function init(monaco:Monaco){
-        monaco.editor.addEditorAction({
-            id:"run1",
-            label:"运行 “Tie.t”",
-            run() {
-              console.log("结绳打包")  
-            },
-            contextMenuGroupId:"run",
-        })
+    function init(monaco: Monaco) {
 
-        monaco.editor.addEditorAction({
-            id:"run1",
-            label:"运行 “Tie.t”",
-            run() {
-              console.log("结绳打包")  
-            },
-            contextMenuGroupId:"run",
+        //加载插件
+
+        (window.plugin.loadPlugin("tiecode.Edit.editor.ActionMenu").regAction() as Array<any>).map(i => {
+            monaco.editor.addEditorAction({
+                id: i.token,
+                label: i.name,
+                run() {
+                    i.action()
+                },
+                contextMenuGroupId: "run",
+            })
         })
     }
 
@@ -34,19 +30,17 @@ function CodeEditor() {
 
     }, [_FontSize])
 
-    return <Editor height={"100%"} width={"100%"} onMount={(editor,monaco)=>{
-        {editor}
-        monaco.editor.defineTheme("github-light", GitHubLight as any)   
+    return <Editor value={value} height={"100%"} width={"100%"} onMount={(editor, monaco) => {
+        { editor }
+        monaco.editor.defineTheme("github-light", GitHubLight as any)
         monaco.editor.defineTheme("github-dark", GitHubDark as any)
-
-        
 
         monaco.editor.setTheme(theme == "light" ? "github-light" : "github-dark")
 
         const tie = new tiecode();
-        tie.reg(editor,monaco)
+        tie.reg(editor, monaco)
 
-        monaco.editor.setModelLanguage(editor.getModel() as any,LANGUAGES_NAME)
+        monaco.editor.setModelLanguage(editor.getModel() as any, LANGUAGES_NAME)
 
         init(monaco)
 

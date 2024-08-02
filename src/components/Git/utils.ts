@@ -89,7 +89,6 @@ export function parseGitFileContentWhole(file: { changes: Array<{ content: strin
         }
     })
 
-    console.log(content);
 
 
 }

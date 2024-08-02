@@ -5,20 +5,15 @@
  */
 
 import { useState } from "react"
-
-type FileTreeItemType = 'file' | 'folder'
-
-type FileTreeItemProps = {
-    name: string,
-    type: FileTreeItemType
-    children?: Array<FileTreeItemProps>
-}
+import { FileTreeItemProps } from "../types/FileTreeItemProps";
+import { project } from "../types/electronInterface/project";
 
 interface FileTreeProps {
-    data?: Array<FileTreeItemProps>
+    path: string,
+    onItemClick?: (item: FileTreeItemProps) => void
 }
 
-const FileTreeItem = ({ data }: { data: FileTreeItemProps }) => {
+const FileTreeItem = ({ data,onItemClick }: { data: FileTreeItemProps,onItemClick?: (item: FileTreeItemProps) => void}) => {
 
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -46,7 +41,7 @@ const FileTreeItem = ({ data }: { data: FileTreeItemProps }) => {
 
                 <img src={data.type === 'file' ? "FileTypeIcon/file_type_typescript.svg" : isExpanded ? "FileTypeIcon/default_folder_opened.svg" : "FileTypeIcon/default_folder.svg"} alt="" width={"18px"} />
 
-                <div>{data.name}</div>
+                <div onClick={onItemClick ? () => onItemClick(data) : undefined}>{data.name}</div>
 
 
             </div>
@@ -63,64 +58,14 @@ const FileTreeItem = ({ data }: { data: FileTreeItemProps }) => {
     </>
 }
 
-export const FileTree = ({ }: FileTreeProps) => {
-    const fileTreeData = [
-        {
-            name: 'src',
-            type: 'folder',
-            children: [
-                {
-                    name: 'index.tsx',
-                    type: 'file'
-                },
-                {
-                    name: 'components',
-                    type: 'folder',
-                    children: [
-                        {
-                            name: 'Header.tsx',
-                            type: 'file'
-                        },
-                        {
-                            name: 'Footer.tsx',
-                            type: 'file'
-                        }
-                    ]
-                },
-                {
-                    name: 'utils',
-                    type: 'folder',
-                    children: [
-                        {
-                            name: 'helpers.js',
-                            type: 'file'
-                        }
-                    ]
-                }
-            ]
-        }, {
-            name: 'dist',
-            type: 'folder'
-        }, {
-            name: 'public',
-            type: 'folder',
-            children: [
-                {
-                    name: 'index.html',
-                    type: 'file'
-                },
-                {
-                    name: 'manifest.json',
-                    type: 'file'
-                }
-            ]
-        }
-    ];
+export const FileTree = ({ path,onItemClick }: FileTreeProps) => {
+
+    const fileTreeData = project.getFileList(path)
 
     return <>
         <div>
             {fileTreeData.map((item, index) => (
-                <FileTreeItem key={index} data={item as any} />
+                <FileTreeItem key={index} data={item as any} onItemClick={onItemClick ? ()=> onItemClick(item as FileTreeItemProps) : undefined}/>
             ))}
         </div>
     </>
