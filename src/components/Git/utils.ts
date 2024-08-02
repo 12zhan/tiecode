@@ -68,3 +68,28 @@ export function parseGitCommit(logEntry: string): Array<gitType> {
 
     return commits
 }
+
+export function parseGitFileContentWhole(file: { changes: Array<{ content: string, type: 'add' | 'delete' | 'modify' }>, from: string, to: string }) {
+    const dir = window.path.join("C:/Users/Administrator/Desktop/tiecode/tiecode", file.from)
+    //取原内容
+
+    if (!window.file.exists(dir)) {
+        return ""
+    }
+
+    const content = window.file.readFile(dir)
+
+    file.changes.forEach((v) => {
+        if (v.type === 'delete') {
+            
+        } else if (v.type === 'add') {
+
+        } else if (v.type === 'modify') {
+
+        }
+    })
+
+    console.log(content);
+
+
+}

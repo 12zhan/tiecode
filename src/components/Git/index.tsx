@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { parseGitLogP, gitType, parseGitCommit } from './utils'
+import {  gitType, parseGitCommit, parseGitFileContentWhole } from './utils'
 
 interface GitProps { }
 
@@ -28,6 +28,8 @@ export const Git = ({ }: GitProps) => {
             }}>
                 {data?.map((item, index) => {
                     console.log(item);
+
+                    parseGitFileContentWhole(item.files![0])
 
                     return <>
                         <div key={index}
