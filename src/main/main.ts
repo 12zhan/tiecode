@@ -7,7 +7,7 @@ function createWindow () {
     height: 600,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
-      nodeIntegration: false,
+      nodeIntegration: true, //允许Web内容访问Node.js API
       contextIsolation: true,
     }
   });

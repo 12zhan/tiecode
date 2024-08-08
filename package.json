@@ -1,7 +1,7 @@
 {
-  "name": "electron-vue-template",
-  "version": "0.1.0",
-  "description": "A minimal Electron + Vue application",
+  "name": "TieCode for Windows",
+  "version": "0.0.1",
+  "description": "",
   "main": "main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
@@ -10,10 +10,10 @@
     "build:mac": "node scripts/build.js && electron-builder --mac",
     "build:linux": "node scripts/build.js && electron-builder --linux"
   },
-  "repository": "https://github.com/deluze/electron-vue-template",
+  "repository": "https://github.com/12zhan/tiecode/tree/electron-vue",
   "author": {
-    "name": "Deluze",
-    "url": "https://github.com/Deluze"
+    "name": "Acode",
+    "url": "https://github.com/12zhan/"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.1",
