@@ -1,0 +1,3 @@
+nsis:
+  installerIcon: './src/renderer/public/icon.ico'
+  uninstallerIcon: './src/renderer/public/icon.ico'

@@ -1,13 +1,29 @@
-import {app, BrowserWindow, ipcMain, session} from 'electron';
-import {join} from 'path';
+import { app, BrowserWindow, ipcMain, session } from 'electron';
+import { join } from 'path';
+import fs from 'fs';
 
-function createWindow () {
-  const mainWindow = new BrowserWindow({
+process.env.APP_ROOT = join(__dirname, '..')
+
+export const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
+export const MAIN_DIST = join(process.env.APP_ROOT, 'dist-electron')
+export const RENDERER_DIST = join(process.env.APP_ROOT, 'dist')
+
+process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? join(process.env.APP_ROOT, 'public') : RENDERER_DIST
+
+
+let mainWindow: BrowserWindow
+
+function createWindow() {
+
+
+  mainWindow = new BrowserWindow({
+    icon: join(process.env.VITE_PUBLIC as any,'icon.ico'),
     width: 800,
     height: 600,
+    frame: false,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
-      nodeIntegration: true, //允许Web内容访问Node.js API
+      nodeIntegration: true,
       contextIsolation: true,
     }
   });
@@ -19,6 +35,7 @@ function createWindow () {
   else {
     mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
   }
+
 }
 
 app.whenReady().then(() => {
@@ -46,6 +63,34 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 });
 
-ipcMain.on('message', (event, message) => {
-  console.log(message);
+/**
+ * 启动DevTools
+ */
+ipcMain.on('devtools', (event) => {
+  if (mainWindow.webContents.isDevToolsOpened()) {
+    mainWindow.webContents.closeDevTools();
+  }else{
+    mainWindow.webContents.openDevTools();
+  }
 })
+
+ipcMain.on('windows:top', (event) => {
+  mainWindow.setAlwaysOnTop(mainWindow.isAlwaysOnTop() ? false : true);
+})
+
+ipcMain.on('windows:close', (event) => {
+  mainWindow.close();
+})
+
+ipcMain.on('windows:max', (event) => {
+  if (mainWindow.isMaximized()) {
+    mainWindow.unmaximize();
+  } else {
+    mainWindow.maximize();
+  }
+})
+
+ipcMain.on('windows:min', (event) => {
+  mainWindow.minimize();
+})
+
